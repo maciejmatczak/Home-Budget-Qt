@@ -71,7 +71,7 @@ def mockup():
 
     session.commit()
 
-    categories = Category.query.all()
+    categories = session.query(Category).all()
 
     for i in range(30):
         transaction = Transaction(
@@ -86,4 +86,6 @@ def mockup():
 
 
 if __name__ == "__main__":
+    Base.metadata.create_all(engine)
     mockup()
+    print(session.query(Transaction).all())
